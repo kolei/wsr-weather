@@ -96,6 +96,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="cityLabel" destination="jO3-8h-cJU" id="47L-mC-1Dt"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="VeS-e9-Q1E"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

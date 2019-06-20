@@ -27,11 +27,38 @@ class TableViewController: UITableViewController {
     }
 
     @IBAction func addCity(_ sender: Any) {
-        let alert = UIAlertController(title: "Добавление города", message: "", preferredStyle: .alert)
-        
-        alert.addAction(<#T##action: UIAlertAction##UIAlertAction#>)
+        let alert = UIAlertController(title: "Добавление город", message: "Добавьте пожалуйста город!", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            
+            
+        }
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (alertAction) in
+            let textField = alert.textFields![0] as UITextField
+            self.cityList.append(textField.text!)
+            self.tableView.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (alertAction) in
+            
+        }))
+        self.present(alert, animated: true, completion: nil)
+
     }
     
+    // переопределяем действие для удаления ячейки
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            
+            cityList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
+            
+            
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -89,14 +116,16 @@ class TableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toMain" {
+            let vc = segue.destination as! ViewController
+            let index = self.tableView.indexPathForSelectedRow
+            vc.city = cityList[(index?.row)!]
+        }
     }
-    */
+
 
 }
