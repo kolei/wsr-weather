@@ -26,6 +26,12 @@ class TableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    @IBAction func addCity(_ sender: Any) {
+        let alert = UIAlertController(title: "Добавление города", message: "", preferredStyle: .alert)
+        
+        alert.addAction(<#T##action: UIAlertAction##UIAlertAction#>)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
