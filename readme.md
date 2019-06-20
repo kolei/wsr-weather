@@ -11,7 +11,7 @@
 * можем задать таблице фон ``tableView.backgroundView = UIImageView.init(image: UIImage(named: "background3"))``
 * кнопку связываем с контроллером (Show Detail)
 * создаем новый swift файл для класса контроллера (File - New - File - Cocoa Touch Class); наследуемся от класса UITavleVewController
-* в свойствах ячейки указываем Identifier cityCell
+* в свойствах ячейки указываем Identifier "cityCell"
 
 ```swift
 var cityList = [String]()
