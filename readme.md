@@ -8,6 +8,7 @@
 ## делаем дополнительный контроллер для таблицы
 * создаем КНОПКУ для перехода на следующий экран
 * создаем контроллер TableView (так же как кнопки)
+* можем задать таблице фон ``tableView.backgroundView = UIImageView.init(image: UIImage(named: "background3"))``
 * кнопку связываем с контроллером (Show Detail)
 * создаем новый swift файл для класса контроллера (File - New - File - Cocoa Touch Class); наследуемся от класса UITavleVewController
 * в свойствах ячейки указываем Identifier cityCell
@@ -42,6 +43,18 @@ return cell
 * в свойствах ячейки указываем созданный класс
 * в ячейку добавляем нужные объекты (label...)
 * outlet-ы объектов добавляем к классу
+
+меняем вывод названия города
+
+```swift
+override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+let cell = tableView.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath) as! TableViewCell
+
+cell.cityLabel.text = cityList[indexPath.row]
+
+return cell
+}
+```
 
 
 

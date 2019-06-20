@@ -16,6 +16,7 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
 
         cityList.append("Москва")
+        tableView.backgroundView = UIImageView.init(image: UIImage(named: "background3"))
         tableView.reloadData()
         
         // Uncomment the following line to preserve selection between presentations
