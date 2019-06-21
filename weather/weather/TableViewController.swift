@@ -15,7 +15,13 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        cityList.append("Москва")
+        //cityList.append("Москва")
+        
+        let savedList = UserDefaults.standard.stringArray(forKey: "cityList") ?? [String]()
+        for city in savedList {
+            cityList.append(city)
+        }
+        
         tableView.backgroundView = UIImageView.init(image: UIImage(named: "background3"))
         tableView.reloadData()
         
@@ -28,18 +34,17 @@ class TableViewController: UITableViewController {
 
     @IBAction func addCity(_ sender: Any) {
         let alert = UIAlertController(title: "Добавление город", message: "Добавьте пожалуйста город!", preferredStyle: .alert)
-        alert.addTextField { (textField) in
-            
-            
-        }
+        alert.addTextField { (textField) in }
+        
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (alertAction) in
             let textField = alert.textFields![0] as UITextField
             self.cityList.append(textField.text!)
+            UserDefaults.standard.set(self.cityList, forKey: "cityList")
             self.tableView.reloadData()
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (alertAction) in
-            
-        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (alertAction) in }))
+        
         self.present(alert, animated: true, completion: nil)
 
     }
@@ -51,6 +56,7 @@ class TableViewController: UITableViewController {
             
             cityList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            UserDefaults.standard.set(self.cityList, forKey: "cityList")
             tableView.reloadData()
             
             
@@ -124,6 +130,8 @@ class TableViewController: UITableViewController {
             let vc = segue.destination as! ViewController
             let index = self.tableView.indexPathForSelectedRow
             vc.city = cityList[(index?.row)!]
+            let userDefaults = UserDefaults()
+            userDefaults.set(cityList[(index?.row)!], forKey: "lastCity")
         }
     }
 
